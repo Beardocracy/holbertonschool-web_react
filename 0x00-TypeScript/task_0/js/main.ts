@@ -3,25 +3,27 @@ interface Student {
     lastName: string;
     age: number;
     location: string;
-}
+};
 
 const studentA: Student = {
     firstName: 'Shooter',
     lastName: 'McGavin',
     age: 1,
     location: 'Tulsa'
-}
+};
 
 const studentB: Student = {
     firstName: 'Scooby',
     lastName: 'Doo',
     age: 2,
     location: 'Flat Earth'
-}
+};
+
+let studentsList: Array<Student> = [ studentA, studentB ];
 
 const table: HTMLTableElement = document.createElement('table');
 const tbody: HTMLTableSectionElement = table.createTBody();
-let studentsList: Array<Student> = [ studentA, studentB ]
+
 
 studentsList.forEach((student) => {
     const row: HTMLTableRowElement = tbody.insertRow();
