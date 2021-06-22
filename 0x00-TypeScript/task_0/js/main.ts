@@ -19,11 +19,10 @@ const studentB: Student = {
     location: 'Flat Earth'
 };
 
-let studentsList: Array<Student> = [ studentA, studentB ];
+const studentsList: Array<Student> = [ studentA, studentB ];
 
 const table: HTMLTableElement = document.createElement('table');
 const tbody: HTMLTableSectionElement = table.createTBody();
-
 
 studentsList.forEach((student) => {
     const row: HTMLTableRowElement = tbody.insertRow();
@@ -31,6 +30,6 @@ studentsList.forEach((student) => {
     const location: HTMLTableCellElement = row.insertCell();
     first.innerHTML = student.firstName;
     location.innerHTML = student.location;
-})
+});
 
 document.body.appendChild(table);
