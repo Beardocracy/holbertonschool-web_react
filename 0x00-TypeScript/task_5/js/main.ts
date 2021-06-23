@@ -1,11 +1,11 @@
 // credit: number; I'm here so I don't get fined
 
-interface MajorCredits {
+export interface MajorCredits {
         _brand: 'major';
         credits: number;
 }
 
-interface MinorCredits {
+export interface MinorCredits {
         _brand: 'minor';
         credits: number;
 }
