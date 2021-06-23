@@ -1,3 +1,5 @@
+// credit: number; I'm here so I don't get fined
+
 interface MajorCredits {
         _brand: 'major';
         credits: number;
