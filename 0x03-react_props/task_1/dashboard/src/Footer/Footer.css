@@ -1,0 +1,6 @@
+.App-footer {
+    font-style: italic;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+}
