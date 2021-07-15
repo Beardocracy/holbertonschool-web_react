@@ -1,21 +1,21 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-        context: path.resolve(__dirname, '../src'),
-        entry: './index.js',
+        entry: './src/index.js',
         output: {
-                path: path.resolve('./public'),
+                path: path.resolve('dist'),
 		filename: 'bundle.js',
-		clean: true,
 	},
 	mode: 'development',
 	devServer: {
-                contentBase: path.resolve('../dist/'),
+                contentBase: '../dist/',
 		compress: true,
 		port: 8564,
                 hot: true,
 	},
 	devtool: 'inline-source-map',
+	plugins: [ new HtmlWebpackPlugin({template: './dist/index.html'}) ],
         performance: {
                 maxAssetSize: 10000,
         },
