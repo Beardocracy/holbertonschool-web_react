@@ -6,6 +6,8 @@ import Footer from '../Footer/Footer.js';
 import Login from '../Login/Login.js';
 import Notifications from '../Notifications/Notifications.js';
 import CourseList from '../CourseList/CourseList.js';
+import BodySection from "../BodySection/BodySection.js";
+import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom.js";
 import { getLatestNotification } from '../utils/utils.js';
 
 
@@ -56,7 +58,18 @@ export default class App extends Component  {
         <Notifications listNotifications={listNotifications}/>
         <Header />
         <hr />
-        {this.props.isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
+        {this.props.isLoggedIn ? (
+					<BodySectionWithMarginBottom>
+						<CourseList listCourses={listCourses} />
+					</BodySectionWithMarginBottom>
+				) : (
+					<BodySectionWithMarginBottom>
+						<Login />}
+					</BodySectionWithMarginBottom>
+				)}
+				<BodySection title="News from the School">
+					<p>Travis says he's going to catch up.</p>
+				</BodySection>
         <hr />
         <Footer />
       </React.Fragment>
