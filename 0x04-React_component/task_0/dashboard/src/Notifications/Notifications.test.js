@@ -46,11 +46,6 @@ describe('<Notifications />', () => {
       expect(wrapper.find('.Notifications')).toHaveLength(1);
     });
 
-    it('div.Notifications is not displayed when displayDrawer is false', () => {
-      const wrapper = shallow(<Notifications displayDrawer={false}/>);
-      expect(wrapper.find('.Notifications')).toHaveLength(0);
-    });
-
     it('div.Notifications is displayed when displayDrawer is true', () => {
       const wrapper = shallow(<Notifications displayDrawer={true}/>);
       expect(wrapper.find('.Notifications')).toHaveLength(1);
@@ -64,7 +59,7 @@ describe('<Notifications />', () => {
     });
 
     it('when listNotifications is empty the message Here is the list of notifications is not displayed, but No new notification for now is', () => {
-      const wrapper = shallow(<Notifications displayDrawer={true} />);
+      const wrapper = shallow(<Notifications displayDrawer={false} />);
       expect(wrapper.find('.Notifications p').text()).not.toEqual('Here is the list of notifications');
       expect(wrapper.find('.Notifications p').text()).toEqual('No new notification for now');
     });
