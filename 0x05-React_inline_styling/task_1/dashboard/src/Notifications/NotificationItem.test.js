@@ -2,6 +2,9 @@ const assert = require('assert');
 import React from 'react';
 import { shallow } from 'enzyme';
 import  NotificationItem  from './NotificationItem.js';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 describe('Test: NotificationItem Component', () => {
   it('Renders without crashing', () => {

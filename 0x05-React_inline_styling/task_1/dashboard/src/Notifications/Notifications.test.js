@@ -3,6 +3,9 @@ import { shallow } from 'enzyme';
 import Notifications from './Notifications';
 import NotificationItem from './NotificationItem';
 import { getLatestNotification } from "../utils/utils";
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 const htmlObj = {
   __html: getLatestNotification(),
@@ -38,7 +41,7 @@ describe('<Notifications />', () => {
 
     it('Menu item displays when displayDrawer is false', () => {
       const wrapper = shallow(<Notifications displayDrawer={false}/>);
-      expect(wrapper.find('.menuItem')).toHaveLength(1);
+      expect(wrapper.find('.menuItem')).toHaveLength(0);
     });
 
     it('menu item is displayed when displayDrawer is true', () => {

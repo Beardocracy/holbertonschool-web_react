@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import './NotificationItem.css';
 import PropTypes from 'prop-types';
 
-
 const NotificationItem = ({ type, html, value, markAsRead }) => {
   return (
     <li 
