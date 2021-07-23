@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './App.css';
 import Header from '../Header/Header.js';
 import Footer from '../Footer/Footer.js';
 import Login from '../Login/Login.js';
@@ -9,6 +8,7 @@ import CourseList from '../CourseList/CourseList.js';
 import BodySection from "../BodySection/BodySection.js";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom.js";
 import { getLatestNotification } from '../utils/utils.js';
+import { StyleSheet, css } from 'aphrodite';
 
 
 export default class App extends Component  {
@@ -57,7 +57,7 @@ export default class App extends Component  {
       <React.Fragment>
         <Notifications listNotifications={listNotifications}/>
         <Header />
-        <hr />
+        <hr className={css(styles.hr)}/>
         {this.props.isLoggedIn ? (
 					<BodySectionWithMarginBottom title='Course list'>
 						<CourseList listCourses={listCourses} />
@@ -70,9 +70,29 @@ export default class App extends Component  {
 				<BodySection title='News from the School'>
 					<p>Travis says he's going to catch up.</p>
 				</BodySection>
-        <hr />
-        <Footer />
+        <hr className={css(styles.hr)}/>
+        <Footer className={css(styles.footer)}/>
       </React.Fragment>
     );
   }
 };
+
+const styles = StyleSheet.create({
+  body: {
+    fontFamily: 'Arial, Helvetica, sans-serif'
+  },
+
+  hr: {
+		backgroundColor: '#E0354B',
+  	height: '.2rem',
+  	margin: '0'
+  },
+
+  footer: {
+    maxHeight: '10vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontStyle: 'italic'
+  },
+})

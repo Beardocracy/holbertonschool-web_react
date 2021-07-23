@@ -6,7 +6,9 @@ const assert = require('assert');
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import App from './App';
+import { StyleSheetTestUtils } from 'aphrodite';
 
+StyleSheetTestUtils.suppressStyleInjection();
 
 describe('<App />', () => {
 
