@@ -1,7 +1,7 @@
 const assert = require('assert');
 import React from 'react';
 import { shallow } from 'enzyme';
-import { NotificationItem } from './NotificationItem.js';
+import  NotificationItem  from './NotificationItem.js';
 
 describe('Test: NotificationItem Component', () => {
   it('Renders without crashing', () => {
