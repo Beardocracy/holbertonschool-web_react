@@ -1,0 +1,60 @@
+/**
+ * @jest-environment jsdom
+ */
+
+const assert = require('assert');
+import React from 'react';
+import { shallow, mount } from 'enzyme';
+import App from './App';
+
+
+describe('<App />', () => {
+
+    it('Renders without crashing', () => {
+        const wrapper = shallow(<App />);
+        assert.strictEqual(wrapper.length, 1);
+    });
+    it('Contains Notifications component', () => {
+      const wrapper = shallow(<App />);
+      assert.strictEqual(wrapper.find('Notifications').exists(), true);
+    });
+    it('Contains Header component', () => {
+      const wrapper = shallow(<App />);
+      assert.strictEqual(wrapper.find('Header').exists(), true);
+    });
+    it('Contains Login component', () => {
+      const wrapper = shallow(<App />);
+      assert.strictEqual(wrapper.find('Login').exists(), true);
+    });
+    it('Contains Footer component', () => {
+      const wrapper = shallow(<App />);
+      assert.strictEqual(wrapper.find('Footer').exists(), true);
+    });
+    it('CourseList not rendered without logged in', () => {
+      const wrapper = shallow(<App />);
+      assert.strictEqual(wrapper.find('CourseList').length, 0);
+    });
+    it('When logged in, CourseList is rendered and Login is not', () => {
+      const wrapper = shallow(<App isLoggedIn={true} />);
+      assert.strictEqual(wrapper.find('CourseList').length, 1);
+      assert.strictEqual(wrapper.find('Login').length, 0);
+    });
+
+		// it("checks behavior of logOut prop", () => {
+		// 	const map = {};
+		// 	window.addEventListener = jest.fn().mockImplementation((event, cb) => {
+		// 		map[event] = cb;
+		// 	});
+		// 	window.alert = jest.fn();
+	
+		// 	const testProps = {
+		// 		logOut: jest.fn()
+		// 	}
+	
+		// 	const wrapper = mount(<App isLoggedIn={true} {...testProps}/>);
+		// 	map.keydown({ ctrlKey: true, key: "h" });
+		// 	expect(window.alert).toHaveBeenCalledWith("Logging you out");
+		// 	expect(testProps.logOut).toHaveBeenCalled();
+		// 	window.alert.mockRestore();
+		// });
+});
