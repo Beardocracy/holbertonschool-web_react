@@ -35,11 +35,18 @@ export default class Notifications extends Component {
 	markAsRead(id) {
 		console.log(`Notification ${id} has been marked as read`);
 	};
+
+	notificationsToggler() { return this.props.displayDrawer ? true : false; }
 	
   render() {
+		const notificationTogglerClass = css(
+			styles.menuItem,
+			this.notificationsToggler() && styles.doNotDisplay
+		)
+
 		return (
 			<React.Fragment>
-				<div className={css(styles.menuItem)}>
+				<div className={notificationTogglerClass} onClick={this.clickOpen} >
 					<p>Your notifications</p>
 				</div>
 				{this.props.displayDrawer && (
@@ -74,6 +81,27 @@ export default class Notifications extends Component {
 	}
 };
 
+const opacityFrames = {
+	from: {
+		opacity: 0.5,
+	},
+	to: {
+		opacity: 1,
+	},
+};
+
+const translateFrames = {
+	"0%": {
+		transform: "translateY(0)",
+	},
+	"50%": {
+		transform: "translateY(-5px)",
+	},
+	"100%": {
+		transform: "translateY(5px)",
+	},
+};
+
 const styles = StyleSheet.create({
 	notificationsStyle: {
 		border: '2px red dashed',
@@ -92,14 +120,26 @@ const styles = StyleSheet.create({
 	menuItem: {
 		display: 'flex',
 		justifyContent: 'flex-end',
+		float: 'right',
 		'@media (max-width: 900px)': {
       display: 'none',
 		},
+		backgroundColor: '#fff8f8',
+		':hover': {
+      cursor: 'pointer',
+      animationName: [opacityFrames, translateFrames],
+      animationDuration: '1s, 500ms',
+      animationIterationCount: '3',
+    },
 	},
 
 	listStyle: {
     listStyle: 'none',
     padding: 0
   },
+
+	doNotDisplay: {
+		display: 'none',
+	}
 
 });
