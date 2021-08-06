@@ -46,7 +46,7 @@ export default class Notifications extends Component {
 
 		return (
 			<React.Fragment>
-				<div className={notificationTogglerClass} onClick={this.clickOpen} >
+				<div className={notificationTogglerClass}>
 					<p>Your notifications</p>
 				</div>
 				{this.props.displayDrawer && (
