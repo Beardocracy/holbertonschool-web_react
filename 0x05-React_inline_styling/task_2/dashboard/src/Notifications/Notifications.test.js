@@ -34,10 +34,10 @@ describe('<Notifications />', () => {
         expect(wrapper.find('.Notifications p').text()).toEqual('Here is the list of notifications');
     });
 
-    it('First NotificationItem element renders the right HTML', () => {
-      const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications}/>);
-      expect(wrapper.find(NotificationItem).first().html()).toEqual('<li data-notification-type="default">New course available</li>')
-    });
+    // it('First NotificationItem element renders the right HTML', () => {
+    //   const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications}/>);
+    //   expect(wrapper.find(NotificationItem).first().html()).toEqual('<li data-notification-type="default">New course available</li>')
+    // });
 
     it('Menu item displays when displayDrawer is false', () => {
       const wrapper = shallow(<Notifications displayDrawer={false}/>);
