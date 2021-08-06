@@ -32,9 +32,17 @@ NotificationItem.defaultProps = {
 const styles = StyleSheet.create({
 	notifyDefault: {
 		color: 'blue',
+		'@media (max-width: 900px)': {
+			borderBottom: '1px solid black',
+			padding: '10px 8px'
+		},
 	},
 	notifyUrgent: {
 		color: 'red',
+		'@media (max-width: 900px)': {
+			borderBottom: '1px solid black',
+			padding: '10px 8px'
+		},
 	}
 });
 
