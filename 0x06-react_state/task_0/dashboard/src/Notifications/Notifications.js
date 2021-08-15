@@ -12,12 +12,6 @@ export default class Notifications extends Component {
 		this.markAsRead = this.markAsRead.bind(this);
 	}
 	
-	static defaultProps = {
-		displayDrawer: false,
-		listNotifications: [],
-		handleDisplayDrawer: () => {},
-    handleHideDrawer: () => {},
-	};
 	static propTypes = {
 		displayDrawer: PropTypes.bool,
 		listNotifications: PropTypes.arrayOf(NotificationItemShape),
@@ -25,6 +19,12 @@ export default class Notifications extends Component {
     handleHideDrawer: PropTypes.func,
 	};
   
+	static defaultProps = {
+		displayDrawer: false,
+		listNotifications: [],
+		handleDisplayDrawer: () => {},
+		handleHideDrawer: () => {},
+	};
 	
   clickClose() {
 		console.log('Close button has been clicked');
@@ -47,23 +47,29 @@ export default class Notifications extends Component {
 			styles.menuItem,
 			this.notificationsToggler() && styles.doNotDisplay
 		)
+		const {
+			displayDrawer,
+			listNotifications,
+			handleDisplayDrawer,
+			handleHideDrawer
+		} = this.props;
 
 		return (
 			<React.Fragment>
-				<div className={notificationTogglerClass}>
+				<div className={notificationTogglerClass} onClick={handleDisplayDrawer}>
 					<p>Your notifications</p>
 				</div>
-				{this.props.displayDrawer && (
+				{displayDrawer && (
 					<div className={css(styles.notificationsStyle)}>
 						<div className='Notifications'>
-							{this.props.listNotifications.length > 0 ? (
+							{listNotifications.length > 0 ? (
 								<React.Fragment>
 									<p style={{ display: 'inline' }}>Here is the list of notifications</p>
-									<button style={{ float: 'right' }} aria-label="Close" onClick={this.clickClose}>
+									<button style={{ float: 'right' }} aria-label="Close" onClick={handleHideDrawer}>
 										<img src={icon} alt="" style={{ height:'1rem' }} />
 									</button>
 									<ul className={css(styles.listStyle)}>
-										{ this.props.listNotifications.map( ({ id, type, value, html }) => (
+										{ listNotifications.map( ({ id, type, value, html }) => (
 											<NotificationItem 
 											key={id}
 											type={type}

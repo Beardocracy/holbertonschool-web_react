@@ -14,39 +14,39 @@ import { StyleSheet, css } from 'aphrodite';
 export default class App extends Component  {
   constructor(props) { 
 	  super(props);
-		this.state = { displayDrawer: false };
 		this.handleKeydown = this.logoutHandler.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
+		this.state = { displayDrawer: false };
 	};
 
-	handleDisplayDrawer() { this.setState({ displayDrawer: true }); };
-	handleHideDrawer() { this.setState({ displayDrawer: false }); };
-
-  
   static propTypes = {
-    isLoggedIn: PropTypes.bool,
+		isLoggedIn: PropTypes.bool,
 		logOut: PropTypes.func
   };
   
   static defaultProps = {
-    isLoggedIn: false,
+		isLoggedIn: false,
 		logOut: () => {}
   };
-
+	
 	logoutHandler = (event) => {
-    if (event.ctrlKey && event.key === 'h') {
-      alert('Logging you out');
+		if (event.ctrlKey && event.key === 'h') {
+			alert('Logging you out');
       this.props.logOut();
+			this.handleHideDrawer();
     }
   };
-
+	
   componentDidMount() {
-  	document.addEventListener('keydown', this.logoutHandler);
+		document.addEventListener('keydown', this.logoutHandler);
   };
   componentWillUnmount() {
-  	document.removeEventListener('keydown', this.logoutHandler);
+		document.removeEventListener('keydown', this.logoutHandler);
   };
+	
+	handleDisplayDrawer() { this.setState({ displayDrawer: true }); };
+	handleHideDrawer() { this.setState({ displayDrawer: false }); };
 
   render() {
     const { displayDrawer } = this.state;
@@ -65,7 +65,7 @@ export default class App extends Component  {
     ];
   
     return (
-      <React.Fragment>
+			<React.Fragment>
         <Notifications 
 					listNotifications={listNotifications}
 					displayDrawer={displayDrawer}
@@ -74,7 +74,7 @@ export default class App extends Component  {
 				/>
         <Header />
         <hr className={css(styles.hr)}/>
-        {this.props.isLoggedIn ? (
+        {isLoggedIn ? (
 					<BodySectionWithMarginBottom title='Course list'>
 						<CourseList listCourses={listCourses} />
 					</BodySectionWithMarginBottom>
