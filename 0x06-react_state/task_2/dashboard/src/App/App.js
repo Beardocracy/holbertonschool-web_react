@@ -9,6 +9,7 @@ import BodySection from "../BodySection/BodySection.js";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom.js";
 import { getLatestNotification } from '../utils/utils.js';
 import { StyleSheet, css } from 'aphrodite';
+import { defaultUser, AppContext } from "./AppContext";
 
 
 export default class App extends Component  {
@@ -17,23 +18,21 @@ export default class App extends Component  {
 		this.handleKeydown = this.logoutHandler.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
-		this.state = { displayDrawer: false };
+		this.state = { 
+			displayDrawer: false,
+			email: defaultUser.email,
+			password: defaultUser.password,
+			isLoggedIn: defaultUser.isLoggedIn,
+			logOut: () => this.logOut(),
+		};
+		this.logIn = this.logIn.bind(this);
+		this.logOut = this.logOut.bind(this);
 	};
 
-  static propTypes = {
-		isLoggedIn: PropTypes.bool,
-		logOut: PropTypes.func
-  };
-  
-  static defaultProps = {
-		isLoggedIn: false,
-		logOut: () => {}
-  };
-	
 	logoutHandler = (event) => {
 		if (event.ctrlKey && event.key === 'h') {
 			alert('Logging you out');
-      this.props.logOut();
+      this.state.logOut();
 			this.handleHideDrawer();
     }
   };
@@ -48,9 +47,27 @@ export default class App extends Component  {
 	handleDisplayDrawer() { this.setState({ displayDrawer: true }); };
 	handleHideDrawer() { this.setState({ displayDrawer: false }); };
 
+	logIn(email, password) {
+    this.setState({  
+			isLoggedIn: true,
+			email: email,
+			password: password,
+		});
+		this.handleDisplayDrawer();
+  };
+
+	logOut() {
+		this.setState({
+      email: "",
+      password: "",
+      isLoggedIn: false
+    });
+    this.handleHideDrawer();
+  };
+
   render() {
     const { displayDrawer } = this.state;
-		const { isLoggedIn } = this.props;
+		const { isLoggedIn } = this.state.isLoggedIn;
 		
 		const listCourses = [
       {id: 1, credit: 60, name: 'ES6'},
@@ -65,7 +82,7 @@ export default class App extends Component  {
     ];
   
     return (
-			<React.Fragment>
+			<AppContext.Provider value={this.state}>
         <Notifications 
 					listNotifications={listNotifications}
 					displayDrawer={displayDrawer}
@@ -80,7 +97,7 @@ export default class App extends Component  {
 					</BodySectionWithMarginBottom>
 				) : (
 					<BodySectionWithMarginBottom title='Log in to continue'>
-						<Login />
+						<Login logIn={this.logIn}/>
 					</BodySectionWithMarginBottom>
 				)}
 				<BodySection title='News from the School'>
@@ -88,7 +105,7 @@ export default class App extends Component  {
 				</BodySection>
         <hr className={css(styles.hr)}/>
         <Footer className={css(styles.footer)}/>
-      </React.Fragment>
+      </AppContext.Provider>
     );
   }
 };

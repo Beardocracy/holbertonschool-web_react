@@ -10,6 +10,8 @@ import { StyleSheetTestUtils } from 'aphrodite';
 
 StyleSheetTestUtils.suppressStyleInjection();
 
+const userMan = { email: 'userman@aol.com', password: 'password', isLoggedIn: true };
+
 describe('<App />', () => {
 
     it('Renders without crashing', () => {
@@ -76,5 +78,22 @@ describe('<App />', () => {
 			wrapper.setState({ displayDrawer: true });
 			wrapper.instance().handleHideDrawer();
 			expect(wrapper.state().displayDrawer).toBe(false);
+		});
+
+		it("verifies that the logIn function updates the state correctly", () => {
+			const wrapper = shallow(<App />);
+			wrapper.instance().logIn(userMan.email, userMan.password);
+			expect(wrapper.state().user.email).toBe('userman@aol.com');
+			expect(wrapper.state().user.password).toBe('password');
+			expect(wrapper.state().user.isLoggedIn).toBe(true);
+		});
+	
+		it("verifies that the logOut function updates the state correctly", () => {
+			const wrapper = shallow(<App />);
+			wrapper.setState({ user: userMan });
+			wrapper.state().logOut();
+			expect(wrapper.state().user.email).toBe('');
+			expect(wrapper.state().user.password).toBe('');
+			expect(wrapper.state().user.isLoggedIn).toBe(false);
 		});
 });
