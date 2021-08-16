@@ -19,4 +19,8 @@ describe('Test: Login Component', () => {
     const wrapper = shallow(<Login />);
     assert(wrapper.find('label').length, 2);
   });
+	it('verify submit button is disabled by default', () => {
+    const wrapper = shallow(<Login />);
+    expect(wrapper.find({ type: 'submit' }).props().disabled).toBe(true);
+	});
 });
