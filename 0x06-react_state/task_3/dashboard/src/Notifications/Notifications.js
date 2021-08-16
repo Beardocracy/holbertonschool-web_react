@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import icon from '../assets/close-icon.png';
 import NotificationItem from './NotificationItem.js';
 import NotificationItemShape from './NotificationItemShape';
@@ -6,10 +6,9 @@ import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 
 
-export default class Notifications extends Component {
+export default class Notifications extends PureComponent {
 	constructor(props) {
 		super(props);
-		this.markAsRead = this.markAsRead.bind(this);
 	}
 	
 	static propTypes = {
@@ -24,22 +23,13 @@ export default class Notifications extends Component {
 		listNotifications: [],
 		handleDisplayDrawer: () => {},
 		handleHideDrawer: () => {},
+		markNotificationAsRead: () => {},
 	};
 	
   clickClose() {
 		console.log('Close button has been clicked');
   };
 	
-	shouldComponentUpdate(nextProps, nextState) {
-		if (nextProps.listNotifications.length > this.props.listNotifications.length || nextProps.displayDrawer != this.props.displayDrawer)
-			return true;
-  	return false;
-  };
-	
-	markAsRead(id) {
-		console.log(`Notification ${id} has been marked as read`);
-	};
-
 	notificationsToggler() { return this.props.displayDrawer ? true : false; }
 	
   render() {
@@ -75,7 +65,9 @@ export default class Notifications extends Component {
 											type={type}
 											value={value}
 											html={html}
-											markAsRead={() => {this.markAsRead(id)}}
+											markNotificationAsRead={() => {
+												this.props.markNotificationAsRead(notification.id)
+											}}
 											/>
 											))
 										}
